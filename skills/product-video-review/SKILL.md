@@ -15,6 +15,7 @@ Open the MP4 and inspect representative frames from every shot, all transitions,
 
 - the video communicates the approved promise and feature hierarchy;
 - every depicted screen, feature, metric, quote, and result is supported by product evidence;
+- every AI-generated clip is limited to the approved atmospheric or B-roll role, is not presented as real product evidence, and has no visible generation defect that weakens the cut;
 - captions and calls to action are accurate, readable, and inside safe areas;
 - screenshots remain sharp, correctly framed, and free of sensitive data;
 - motion is smooth, deterministic, and subordinate to comprehension;
@@ -23,6 +24,8 @@ Open the MP4 and inspect representative frames from every shot, all transitions,
 - music, voiceover, and effects are balanced and synchronized;
 - the render has the expected aspect ratio, frame rate, duration, codec, and audible track;
 - all assets are authorized for the intended use.
+
+Confirm that Remotion remained the final composition and rendering engine. When AI footage was used, verify that the recorded model was the lowest-priced eligible Seedance Fast variant available at generation time, or that the user explicitly approved a different model.
 
 Do not infer a pass from successful rendering. Name concrete evidence and exact timestamps for material defects.
 

@@ -26,6 +26,8 @@ Do not log in, enter credentials, access private data, or change the product unl
 
 Capture explicit user requirements for duration, aspect ratio, channel, deadline, voiceover, captions, music, must-show features, prohibited content, and supplied assets. Do not reopen choices the user already made.
 
+Treat Remotion as the default production engine. Identify any shot that truly requires generated footage rather than real product capture, supplied licensed media, or Remotion graphics. Do not add AI video merely for spectacle. When generated footage is necessary, record that requirement explicitly so production can use the lowest-priced available Seedance Fast variant.
+
 When collaboration mode is unspecified, recommend one of these:
 
 - `template-led`: adapt a known structure when speed and predictability matter;
@@ -45,6 +47,7 @@ Return a concise brief directly in the conversation with:
 - duration, aspect ratio, and destination;
 - voice, tone, and visual system;
 - collaboration mode;
+- production engine, with Remotion as the default and any justified AI-video shots called out separately;
 - approved evidence and blocked or sensitive assets;
 - success criteria.
 

@@ -1,6 +1,6 @@
 ---
 name: remotion-video-production
-description: Build and render an approved product-video storyboard as a deterministic Remotion project using authorized screenshots, recordings, graphics, captions, music, and sound effects. Use when the user wants the actual MP4 or a production revision. Do not use before the brief and storyboard are sufficiently resolved.
+description: Build and render an approved product-video storyboard as a deterministic Remotion project using authorized screenshots, recordings, graphics, captions, music, and sound effects, with optional Seedance Fast footage only when a shot genuinely requires AI video. Use when the user wants the actual MP4 or a production revision. Do not use before the brief and storyboard are sufficiently resolved.
 ---
 
 # Remotion Video Production
@@ -9,6 +9,8 @@ Produce the real video, not a plan for one.
 
 Keep all visible text, captions, voiceover, file-facing labels, and final user communication in English. Optimize the story for the approved United States audience.
 
+Remotion is the default production engine. AI video is an optional shot source, not the renderer for the complete product video.
+
 ## Prepare the project and assets
 
 Use an existing Remotion project when supplied; otherwise create the smallest project required by the approved storyboard. Check the installed Remotion version and its current APIs before coding. Verify the applicable Remotion license for the intended use.
@@ -16,6 +18,23 @@ Use an existing Remotion project when supplied; otherwise create the smallest pr
 Capture real authorized product states at a consistent viewport and pixel density. Use fictional or redacted data when a screen might expose customer, employee, account, financial, health, credential, or internal information. Do not recreate an interface by hand when the shot claims to show the real product.
 
 Store approved assets locally in the production project. Preserve original aspect ratios, use lossless stills where text clarity matters, and document the source of licensed media. Never fetch or embed a secret at render time.
+
+## Optional AI-generated footage
+
+Use real product capture, supplied licensed media, and Remotion graphics whenever they can satisfy the storyboard. Do not call an AI video model for interface demonstrations, typography, transitions, camera moves, or decorative motion that Remotion can produce deterministically.
+
+When an approved shot genuinely requires generated cinematic footage or B-roll:
+
+1. read the current ZooWork model or tool catalog instead of relying on a remembered model ID;
+2. filter to eligible models whose canonical or display name clearly identifies the `Seedance Fast` family;
+3. choose the variant with the lowest currently reported generation price for the required duration and resolution; if comparable price metadata is unavailable, use the catalog's default eligible Seedance Fast entry and state that price ordering could not be verified;
+4. do not silently use Seedance Pro, another provider, or a more expensive model when Seedance Fast is unavailable; report the limitation and ask before changing model families;
+5. generate only the specific approved shot, at the lowest duration and resolution that still meets the storyboard and final delivery format;
+6. wait for the actual completion event when generation is asynchronous and never duplicate a pending request;
+7. inspect the returned clip for prompt fidelity, artifacts, unsafe content, rights concerns, and product-truth risk before importing it into Remotion;
+8. make at most one targeted generation retry for that shot unless the user explicitly requests more iterations.
+
+Record the selected catalog model name and the reason it was the cheapest eligible Seedance Fast option. Do not expose internal model IDs in public-facing UI. Clearly distinguish generated atmospheric footage from real product evidence.
 
 ## Implement deterministically
 

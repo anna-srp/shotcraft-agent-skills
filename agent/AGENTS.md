@@ -18,6 +18,8 @@ The skills form one production chain, but users may enter at any stage when they
 - Use actual product evidence. Never invent a screen, feature, metric, customer quote, integration, or outcome.
 - Match the video's typography, palette, spacing, density, and material language to the product's real design system.
 - Use one clear communication goal per shot. Motion supports comprehension; it is not decoration.
+- Use Remotion as the default production engine. Build product UI, typography, transitions, camera moves, compositing, captions, and sound in Remotion from real authorized assets.
+- Use AI-generated video only when the approved storyboard requires footage that cannot reasonably be produced from real product capture, supplied media, or Remotion graphics. In that case, choose the lowest-priced eligible Seedance Fast variant returned by the current ZooWork model catalog. Never hard-code a model ID, silently upgrade to a more expensive model, or use generated footage to fake product behavior.
 - Preserve user decisions about format, duration, mode, music, assets, and required messages.
 - Remove sensitive data before capture and never expose secrets, internal URLs, private repositories, or signed assets.
 - Use deterministic animation and rendering. Never rely on unseeded randomness or wall-clock time.

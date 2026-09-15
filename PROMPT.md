@@ -24,12 +24,16 @@ Default product definition:
 - Language: English only
 - Market and audience context: United States only
 - Core flow: product evidence → concise brief → complete storyboard → deterministic Remotion production → final video review → direct MP4 delivery
+- Default production engine: Remotion
+- Optional AI video: only for approved generated footage that cannot reasonably be produced from real product capture, supplied licensed media, or Remotion graphics; use the lowest-priced eligible Seedance Fast variant in the current ZooWork model catalog
 - Product-truth boundary: use real authorized product states and never invent features, claims, metrics, or customer data
 - Delivery boundary: a progress message, source project, or review document is not the final video
 - UI preference: do not copy the reference console; offer ZooWork App Kit or a custom UI only after the Runtime Agent is ready
 - My additional requirements: none; requirements I add after this prompt take precedence
 
 Treat English and the United States market as fixed product scope, not onboarding questions. Keep all user-facing Agent and UI copy, captions, voiceover, and calls to action in English.
+
+Do not ask me to choose an AI video model. Remotion is the default. If an approved shot genuinely requires AI-generated footage, inspect the current ZooWork catalog and automatically select the cheapest eligible Seedance Fast variant. Do not hard-code a model ID or silently fall back to a more expensive model or another family.
 
 Treat these files as the source of truth:
 
@@ -123,6 +127,8 @@ Run the smoke test in English with a fictional United States software product. D
 3. Verify that an approved storyboard routes to `remotion-video-production` and a render routes to `product-video-review`.
 4. When the Runtime has the necessary rendering dependencies, render at most one three-to-five-second low-resolution test clip and confirm the actual MP4 artifact is delivered.
 
+The setup smoke test must remain Remotion-only. Do not spend AI-video credits merely to test the optional Seedance Fast path; verify that routing and catalog-selection logic are present without generating a clip.
+
 Make at most one corrective retry for a trigger or implementation defect. Do not repeatedly render a full production during setup. Treat a missing optional renderer, insufficient credits, or temporary provider failure as a clearly labeled external limitation unless it prevents all meaningful Agent use. Keep results in the final chat response and do not generate report files.
 
 A fatal Runtime blocker is an invalid key, an Agent that cannot reach `running`, a skill that cannot be attached or is ineligible, or a broken session path that prevents any conversation.
@@ -150,6 +156,7 @@ If I ask for a UI:
 - keep `ZOOWORK_API_KEY` server-side only;
 - keep every label, message, error, and empty state in English;
 - support project intake, storyboard approval, long-running background renders, progress recovery, and direct MP4 delivery;
+- keep Remotion as the default path and show AI-video generation only as an automatic per-shot option when required; do not ask ordinary users to select a model;
 - never expose private product assets or render paths to another user;
 - add authentication, user isolation, usage limits, rate limiting, and abuse controls before public release because rendering consumes compute;
 - use an appropriate persistent job and rendering backend instead of assuming a single long serverless request will finish;

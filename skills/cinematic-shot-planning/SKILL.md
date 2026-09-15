@@ -29,6 +29,8 @@ For each shot specify:
 - sound effect, music, or silence cue;
 - any capture, privacy, or implementation risk.
 
+Assign each shot one source type: `real product capture`, `supplied licensed media`, `Remotion graphic`, or `AI-generated footage`. Default to the first three. Use `AI-generated footage` only when the narrative requires a cinematic scene or B-roll that cannot reasonably be built from the available real assets. Never use generated footage to depict a product screen, feature, metric, customer, or result as if it were real.
+
 Let important product states settle long enough to read. Avoid repeating the same hero technique. Reserve whole-frame impacts, flashes, shakes, or scale punches for a few genuine emphasis points; use element-level motion for ordinary beats.
 
 If the user supplies rhythmic music, analyze its tempo, phase, major sections, and strongest transients before locking shot boundaries. Align key cuts and impacts to measured beats, then plan a post-render sync check. If no music is supplied, pace from content first and add music later.
