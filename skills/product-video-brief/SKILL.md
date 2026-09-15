@@ -1,0 +1,51 @@
+---
+name: product-video-brief
+description: Turn a website, app, repository, screenshots, recording, or written product description into a concise production-ready video brief. Use before storyboarding when the audience, message, product truth, format, brand system, or collaboration mode is unresolved. Do not write video code or invent unsupported product claims.
+---
+
+# Product Video Brief
+
+Establish what the video must communicate before deciding how it moves.
+
+Keep all user-facing text in English and define the audience within the United States market.
+
+## Inspect product evidence
+
+Use only authorized, read-only product sources supplied by the user or clearly public pages. Identify:
+
+- the product's one-sentence value proposition;
+- the primary United States audience and their problem;
+- the one action the video should drive;
+- the three to five most important demonstrable features;
+- available pages, states, screenshots, recordings, logos, fonts, colors, and design tokens;
+- unsupported claims, unavailable states, capture blockers, sensitive data, and asset-rights risks.
+
+Do not log in, enter credentials, access private data, or change the product unless the user separately authorizes that action. Never treat a marketing claim as verified product behavior without observable support.
+
+## Resolve production choices
+
+Capture explicit user requirements for duration, aspect ratio, channel, deadline, voiceover, captions, music, must-show features, prohibited content, and supplied assets. Do not reopen choices the user already made.
+
+When collaboration mode is unspecified, recommend one of these:
+
+- `template-led`: adapt a known structure when speed and predictability matter;
+- `autonomous`: proceed from brief through final render when the user delegates creative decisions;
+- `guided`: pause for approval of the brief and storyboard when the user wants creative control.
+
+Explain the recommendation in one sentence. Ask at most three questions only when the answers materially change the story, format, or rights.
+
+## Output
+
+Return a concise brief directly in the conversation with:
+
+- audience and problem;
+- core promise and proof;
+- feature priority;
+- call to action;
+- duration, aspect ratio, and destination;
+- voice, tone, and visual system;
+- collaboration mode;
+- approved evidence and blocked or sensitive assets;
+- success criteria.
+
+Hand the approved or autonomous brief to `cinematic-shot-planning`. Do not create a separate report file unless requested.
