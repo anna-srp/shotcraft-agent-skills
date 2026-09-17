@@ -29,6 +29,8 @@ Confirm that Remotion remained the final composition and rendering engine. When 
 
 Do not infer a pass from successful rendering. Name concrete evidence and exact timestamps for material defects.
 
+For efficient Runtime review, probe the finished MP4 first, then extract only the representative frames needed for visual inspection. Reuse `ffprobe` and `ffmpeg` from `PATH` or the installed Remotion packages. Do not open local video paths in a browser, reinstall rendering dependencies, or create another render before inspection proves that a material defect requires it.
+
 ## Correct and deliver
 
 When a defect blocks delivery, send a focused correction to `remotion-video-production` and render once more. Do not redesign the entire approved concept during QA. If the bounded correction still fails, deliver the best valid artifact only when the limitation is clear and does not misrepresent the product; otherwise report the terminal blocker.

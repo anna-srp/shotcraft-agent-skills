@@ -1,169 +1,98 @@
-# Complete Prompt for Codex / Claude Code
+# Fast Setup Prompt for Codex / Claude Code
 
 Copy everything below this line into a new conversation.
 
 ---
 
-Build an English-language cinematic product-video Agent for products serving the United States market on ZooWork in the current project. Reproduce the core capabilities of Shotcraft, not its protected console UI.
+Build and deploy Shotcraft, an English-language product-video Agent for the United States market, on ZooWork Runtime using this repository:
 
-The required default outcome is:
+<https://github.com/anna-srp/shotcraft-agent-skills>
 
-1. install and read the official ZooWork development skill;
-2. ask me to configure only my ZooWork API key;
-3. create or reuse one ZooWork Agent;
-4. upload and attach the four product-video skills in this repository;
-5. start the Agent and confirm that it is running on ZooWork Runtime;
-6. run a small bounded smoke test;
-7. report the usable Agent directly in the chat and ask whether I want a UI.
+The default mode is **fast setup**, not full media acceptance testing. The required outcome is one persistent ZooWork Agent with the repository's four Skills attached, running, and verified by one lightweight no-render Runtime turn. Do not generate a sample image or video during setup. Do not build a UI unless I ask after the Runtime Agent is ready.
 
-Do not turn this task into a documentation or QA project. Do not create an acceptance report, retry assessment, evidence bundle, Markdown deliverable, or other report file unless I explicitly request one. The Agent running successfully on ZooWork Runtime is the primary deliverable. A UI is an optional next step.
-
-Default product definition:
+## Fixed product scope
 
 - Agent name: Shotcraft
 - Language: English only
-- Market and audience context: United States only
-- Core flow: product evidence → concise brief → complete storyboard → deterministic Remotion production → final video review → direct MP4 delivery
-- Default production engine: Remotion
-- Optional AI video: only for approved generated footage that cannot reasonably be produced from real product capture, supplied licensed media, or Remotion graphics; use the lowest-priced eligible Seedance Fast variant in the current ZooWork model catalog
-- Product-truth boundary: use real authorized product states and never invent features, claims, metrics, or customer data
-- Delivery boundary: a progress message, source project, or review document is not the final video
-- UI preference: do not copy the reference console; offer ZooWork App Kit or a custom UI only after the Runtime Agent is ready
-- My additional requirements: none; requirements I add after this prompt take precedence
+- Market: United States only
+- Workflow: product evidence → brief → storyboard → deterministic Remotion production → actual-render review → MP4 delivery
+- Default renderer: Remotion
+- Optional AI footage: only when an approved shot cannot reasonably use real product capture, licensed media, or Remotion graphics; automatically choose the lowest-priced eligible Seedance Fast variant in the current ZooWork catalog
+- Product truth: never invent features, interfaces, metrics, testimonials, or customer data
+- UI: optional and separate from Runtime deployment; never copy the reference console's protected design
+- Additional requirements I give after this prompt take precedence
 
-Treat English and the United States market as fixed product scope, not onboarding questions. Keep all user-facing Agent and UI copy, captions, voiceover, and calls to action in English.
+## 1. Open the repository
 
-Do not ask me to choose an AI video model. Remotion is the default. If an approved shot genuinely requires AI-generated footage, inspect the current ZooWork catalog and automatically select the cheapest eligible Seedance Fast variant. Do not hard-code a model ID or silently fall back to a more expensive model or another family.
+Use the existing local repository when present. Otherwise clone the repository once and work from its root. Read `README.md`, `agent/AGENTS.md`, and the four `skills/*/SKILL.md` entrypoints.
 
-Treat these files as the source of truth:
+## 2. Load the official ZooWork development Skill
 
-- `agent/AGENTS.md`
-- `skills/product-video-brief/SKILL.md`
-- `skills/cinematic-shot-planning/SKILL.md`
-- `skills/remotion-video-production/SKILL.md`
-- `skills/product-video-review/SKILL.md`
+Before making ZooWork calls, use the official `zoowork-managed-agents` development Skill from:
 
-Follow this workflow in order.
+<https://github.com/SerendipityOneInc/zoowork-sdk-skills>
 
-## 0. Install and read the official ZooWork development skill
+If it is already installed, read and use the installed copy. Do not clone or reinstall it merely to check for updates. If it is missing, install it once, then follow its required deployment guidance. This development Skill teaches Codex or Claude how to deploy; the four product-video Skills in this repository are what run on the ZooWork Agent.
 
-Before writing any ZooWork SDK call, run:
+## 3. Ask me for only the ZooWork API key
 
-```bash
-npx skills add SerendipityOneInc/zoowork-sdk-skills
-```
+Check whether `ZOOWORK_API_KEY` is available in the process environment or a local `.env` file. Never print its value.
 
-Then read the complete `SKILL.md` for `zoowork-managed-agents`, its deployment reference, and any SDK, artifact, sandbox, or event-streaming reference needed for this implementation. If the official repository already exists locally, read it instead of installing again.
-
-The official skill is for the development assistant. The four skills in this repository are uploaded and attached to the Agent running on ZooWork Runtime. Do not confuse these layers.
-
-## 1. Ask for only the ZooWork API key
-
-Check only whether `ZOOWORK_API_KEY` is configured. Do not print its value.
-
-The API key is the only value I enter manually. Never ask me to find, copy, paste, or configure an Agent ID. ZooWork returns the Agent ID after creation; save and reuse it automatically.
-
-If the key is missing, pause and ask me to:
+If it is missing, ask me to:
 
 1. sign in at <https://zoowork.ai/claw-settings?tab=account-api-keys>;
-2. open `Settings → API Keys → Create API Key`;
-3. create and immediately copy the one-time `zct_...` secret;
-4. save it myself as `ZOOWORK_API_KEY` in a local `.env` file;
-5. tell you when it is saved without pasting the key into the chat.
+2. choose `Settings → API Keys → Create API Key`;
+3. copy the one-time `zct_...` secret;
+4. save it myself as `ZOOWORK_API_KEY` in this repository's ignored `.env` file;
+5. tell you when it is saved without pasting it into chat.
 
-Ensure `.env` is ignored by Git. The key must never enter a prompt, source file, frontend bundle, log, artifact, or Git history. Do not create, rotate, or delete the key on my behalf.
+The API key is the only value I enter manually. Never ask me for an Agent ID. The setup script creates or discovers one persistent Agent and stores its ID in the ignored `.zoowork/` directory. Keep the key out of prompts, source files, logs, artifacts, frontend bundles, and Git history.
 
-After I confirm it is saved, call `listModels()` as the smallest read-only validation. Report only whether validation succeeded and how many models are available.
+## 4. Run the repository's fast setup
 
-## 2. Read the product definition and proceed
+After the key is available, use the checked-in automation instead of writing a new deployment harness:
 
-Read `agent/AGENTS.md` and all four skill entrypoints. Do not require a separate design-approval document when the repository already answers the implementation questions. Briefly state what you will provision, then proceed.
+```bash
+npm ci
+npm run setup
+```
 
-## 3. Create or reuse one Agent
+Do not run `npm view`, browse package registries, inspect the entire SDK declaration file, or create replacement provisioning scripts unless the checked-in command fails with a concrete compatibility error.
 
-Follow `zoowork-managed-agents` exactly:
+`npm run setup` must:
 
-- Use `@zoowork-ai/sdk`; do not guess package names or API shapes.
-- Select a model from the actual `listModels()` response.
-- Use `agent/AGENTS.md` as the Persona document.
-- Check ignored local state and stable labels for an existing Agent. Never ask me for its ID.
-- Call `createAgent()` only when the Agent genuinely does not exist, using a stable idempotency key.
-- Save the returned `agent_id` in ignored server-side state such as `.zoowork/shotcraft-agent.json`.
-- If a backend later expects `ZOOWORK_AGENT_ID`, populate it automatically from saved state.
-- Never create an Agent inside a per-message request path.
+1. validate the key with the read-only model catalog;
+2. create or reuse one persistent Agent using stable state, labels, and an idempotency key;
+3. package all four Skills with the correct top-level directory;
+4. upload only new or changed Skill versions;
+5. attach only missing Skills and verify that all four are enabled and eligible;
+6. start the Agent only when needed and wait for `desired_state === 'running'` through the documented helper;
+7. run one English, United States, brief-only Runtime turn that confirms `product-video-brief` triggers;
+8. stop without storyboarding, installing render dependencies, rendering media, inspecting artifacts, or using Seedance.
 
-## 4. Package, upload, and attach the four skills
+The quick verification has a two-minute Runtime budget. If it fails, diagnose that one failure. Do not silently escalate into a full render or repeatedly create sessions.
 
-Process:
+## 5. Finish directly in chat
 
-- `product-video-brief`
-- `cinematic-shot-planning`
-- `remotion-video-production`
-- `product-video-review`
+When fast setup succeeds, respond directly with:
 
-For each skill:
+- confirmation that Shotcraft is running on ZooWork Runtime;
+- the automatically generated Agent ID;
+- the four attached Skill names and their enabled/eligible status;
+- the quick verification result and elapsed time;
+- a clear statement that no media was rendered and no image/video generation credits were spent during setup;
+- this exact question: “Would you like to make a real product video now, customize the workflow, or build a UI for this Agent?”
 
-1. verify that the directory name matches the `name` in `SKILL.md` frontmatter;
-2. preserve that directory as the zip's top-level directory;
-3. upload a new owned skill or add a version when the same owned skill already exists and changed;
-4. attach it with the documented SDK method;
-5. verify that it is attached, enabled, and eligible;
-6. persist skill IDs and versions without storing secrets.
+Do not create an acceptance report, retry assessment, evidence bundle, or Markdown deliverable. The running Agent is the deliverable.
 
-Do not re-upload global ZooWork catalog skills that a new Agent already receives automatically.
+## 6. Full video testing is opt-in
 
-## 5. Publish the Agent to ZooWork Runtime
+Do not run a Remotion acceptance render during installation. Run the complete brief → storyboard → render → review → MP4 publication flow only when I explicitly request a full acceptance test or provide a real authorized product-video task.
 
-After the Persona and skills are attached, call the documented start method and `waitUntilRunning(agentId)`. Do not use `actual_state` as the API-readiness signal.
+For an explicitly requested acceptance test, keep it Remotion-only, use one three-to-five-second low-resolution clip, use no network media or AI-video credits, make at most one corrective render, inspect the actual MP4 with existing media tools, and publish the actual artifact. Explain beforehand that a first render can take 10–20 minutes because Runtime may need rendering dependencies and browser binaries.
 
-For this task, “published to ZooWork Runtime” means the persistent Agent exists, all four skills are attached, and `waitUntilRunning()` confirms `desired_state === 'running'`. This does not automatically create a public website or render console.
+## 7. UI is opt-in
 
-## 6. Run a bounded smoke test
+If I ask for a UI after the Runtime Agent is ready, recommend ZooWork App Kit when I have no existing frontend preference; otherwise adapt my frontend. Keep the API key server-side, pin the saved Agent ID automatically, set `AGENT_PICKER=off`, and keep all copy in English for the United States market. Support long-running renders, refresh recovery, authentication, user isolation, usage limits, and direct MP4 delivery. Preview locally first and ask for approval before public deployment.
 
-Run the smoke test in English with a fictional United States software product. Do not access a private product or real customer data.
-
-1. Verify that a short product description triggers `product-video-brief`.
-2. Verify that an approved brief routes to `cinematic-shot-planning` and returns a complete short storyboard.
-3. Verify that an approved storyboard routes to `remotion-video-production` and a render routes to `product-video-review`.
-4. When the Runtime has the necessary rendering dependencies, render at most one three-to-five-second low-resolution test clip and confirm the actual MP4 artifact is delivered.
-
-The setup smoke test must remain Remotion-only. Do not spend AI-video credits merely to test the optional Seedance Fast path; verify that routing and catalog-selection logic are present without generating a clip.
-
-Make at most one corrective retry for a trigger or implementation defect. Do not repeatedly render a full production during setup. Treat a missing optional renderer, insufficient credits, or temporary provider failure as a clearly labeled external limitation unless it prevents all meaningful Agent use. Keep results in the final chat response and do not generate report files.
-
-A fatal Runtime blocker is an invalid key, an Agent that cannot reach `running`, a skill that cannot be attached or is ineligible, or a broken session path that prevents any conversation.
-
-## 7. Finish with the Agent, not a Markdown file
-
-When the Agent is running, respond directly with:
-
-- a clear statement that Shotcraft is running on ZooWork Runtime;
-- the automatically generated `agent_id`;
-- the four attached skill names and status;
-- a short smoke-test summary;
-- any external limitation, without presenting it as the main deliverable;
-- the exact next-step question: “Would you like me to build a UI for this Agent now? I can use ZooWork App Kit or adapt your existing frontend.”
-
-Do not create or return an acceptance report unless I explicitly ask for one. If I do not want a UI, stop after delivering the running Agent status.
-
-## 8. Build and deploy a UI only if I want one
-
-If I ask for a UI:
-
-- recommend ZooWork App Kit when I have no existing frontend or stack preference;
-- otherwise adapt my existing frontend and keep ZooWork sessions and event handling on the backend;
-- pin the UI to the automatically saved Agent ID and set `AGENT_PICKER=off`;
-- keep `ZOOWORK_API_KEY` server-side only;
-- keep every label, message, error, and empty state in English;
-- support project intake, storyboard approval, long-running background renders, progress recovery, and direct MP4 delivery;
-- keep Remotion as the default path and show AI-video generation only as an automatic per-shot option when required; do not ask ordinary users to select a model;
-- never expose private product assets or render paths to another user;
-- add authentication, user isolation, usage limits, rate limiting, and abuse controls before public release because rendering consumes compute;
-- use an appropriate persistent job and rendering backend instead of assuming a single long serverless request will finish;
-- let the layout and brand be customized instead of copying the protected console.
-
-Preview and verify the UI locally. Before making it public or changing production access, ask for my explicit approval. After approval, deploy it and return the actual URL rather than a report file.
-
-The final product flow is: skills attached → Agent running on ZooWork Runtime → direct usable-status response → optional UI choice → optional UI deployment.
-
----
+The intended flow is: API key → fast incremental setup → running Runtime Agent → one no-render verification → optional real video, workflow customization, or UI.

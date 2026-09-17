@@ -1,0 +1,13 @@
+{
+  "name": "shotcraft-agent-deployment",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "node scripts/provision.mjs",
+    "verify": "node scripts/verify.mjs",
+    "setup": "npm run deploy && npm run verify"
+  },
+  "dependencies": {
+    "@zoowork-ai/sdk": "0.7.0"
+  }
+}

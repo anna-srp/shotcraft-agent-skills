@@ -1,37 +1,89 @@
 # Shotcraft Agent Skills
 
-A portable, English-language skill pack distilled from the core Shotcraft product-video workflow for products serving the United States market. It does not reproduce the protected console UI. It provides the capability layer that Codex, Claude Code, or another coding agent can install on ZooWork Runtime and later connect to any interface.
+A portable, English-language Skill pack for building product videos for the United States market. It preserves Shotcraft's core capability layer without copying the reference console UI.
 
-## Quick start
+## Fast start
 
 1. Clone this repository and open it in Codex or Claude Code.
 2. Copy the complete contents of [PROMPT.md](PROMPT.md) into a new conversation.
-3. Sign in to ZooWork, create an API key under `Settings → API Keys`, and save it yourself in a local `.env` file. The API key is the only value you enter manually; never paste it into the chat.
-4. Let the coding agent create the Agent, automatically save its returned `agent_id`, upload and attach the four skills, start it on ZooWork Runtime, and run a bounded smoke test.
-5. Receive the running Agent status directly in the chat. The coding agent will then ask whether you want a UI.
+3. Create a ZooWork API key under `Settings → API Keys`, save it in a local ignored `.env` file, and tell the assistant when it is ready. Never paste the key into chat.
+4. The assistant runs the repository's checked-in setup and returns the running Agent status directly in chat.
+5. Choose whether to make a real video, customize the workflow, or build a UI.
+
+The API key is the only value entered manually. The Agent ID is created, stored, and reused automatically.
+
+## Why setup does not render a video
+
+Fast setup proves the parts required for immediate use: authentication, one persistent Agent, all four attached Skills, Runtime readiness, and one real no-render Skill-routing turn. It intentionally does not install rendering dependencies or create a sample MP4.
+
+| Mode | What it does | Expected use |
+|---|---|---|
+| Fast setup | Incremental deployment plus one brief-only Runtime verification | Default installation path |
+| Real product task | Brief, storyboard, Remotion production, review, and MP4 delivery | First actual use |
+| Full acceptance test | One short synthetic Remotion render and artifact verification | Only when explicitly requested |
+
+The quick Runtime verification has a two-minute hard budget. A first full Remotion render can take 10–20 minutes because the Runtime may need browser and rendering dependencies. That work is deferred until it produces something the user actually wants.
+
+## Included automation
+
+After saving `ZOOWORK_API_KEY` in `.env`, the complete fast path is:
+
+```bash
+npm ci
+npm run setup
+```
+
+The commands are also available separately:
+
+```bash
+npm run deploy  # create/reuse the Agent and reconcile only changed Skills
+npm run verify  # one brief-only Runtime turn; never renders media
+```
+
+Ignored `.zoowork/` state stores the generated Agent ID, Skill IDs, content hashes, versions, and last verification result. It stores no API key. Repeated deployment reuses the same Agent and skips unchanged Skill uploads.
 
 ## Expected outcome
 
-The default deliverable is a persistent Shotcraft Agent running on ZooWork Runtime with all four skills attached. The setup assistant reports the Agent ID, skill status, and smoke-test result directly in the conversation. It must not replace the Agent with an acceptance-report Markdown file.
+The default deliverable is a persistent Shotcraft Agent running on ZooWork Runtime with all four Skills attached and eligible. Setup reports its status directly in the conversation; it does not replace the Agent with a Markdown test report.
 
-ZooWork Runtime hosts the Agent and its skills; it does not automatically create a public video-production website. A render console or customer-facing UI is optional and should be built only after the Runtime Agent is ready and the user approves that next step.
+ZooWork Runtime hosts the Agent and Skills. It does not automatically create a public video-production website. A render console or customer-facing UI is a separate, optional step.
 
-## Included skills
+## Included Skills
 
-| User intent | Runtime skill | Purpose |
+| User intent | Runtime Skill | Purpose |
 |---|---|---|
-| Turn a product into a production-ready video brief | `product-video-brief` | Identifies the audience, message, real product evidence, brand system, format, and collaboration mode |
-| Design a cinematic storyboard | `cinematic-shot-planning` | Maps one product idea to each shot, controls pacing and energy, and plans real UI capture, motion, transitions, and sound |
-| Build and render the video | `remotion-video-production` | Uses Remotion by default, optionally generates a required shot with the cheapest available Seedance Fast model, and publishes the actual MP4 |
-| Review and correct the finished cut | `product-video-review` | Checks narrative, product truth, visual quality, timing, audio, and sensitive-data safety before delivery |
+| Turn product evidence into a production-ready brief | `product-video-brief` | Defines audience, message, evidence, brand, format, and collaboration mode |
+| Design a cinematic storyboard | `cinematic-shot-planning` | Plans shot timing, real product states, motion, transitions, captions, and sound |
+| Build and render the video | `remotion-video-production` | Uses Remotion by default and optional Seedance Fast only for justified generated footage |
+| Review and deliver the finished cut | `product-video-review` | Checks truth, narrative, visuals, timing, audio, privacy, and the actual MP4 |
 
-These four skills cover the complete product-video path without bundling a console, gallery, template library, or large media collection.
+## Two different kinds of Skill
+
+- `zoowork-managed-agents` is installed into the development assistant. It teaches Codex or Claude how to use ZooWork correctly.
+- The four Skills in this repository's `skills/` directory are uploaded and attached to the Shotcraft Agent on ZooWork Runtime.
+
+Do not upload the development Skill to the Runtime Agent or install the four product Skills into Codex as a substitute for Runtime deployment.
+
+## Product boundaries
+
+- All user-facing conversation, captions, voiceover, and UI copy are English only.
+- The market and audience context is the United States only.
+- Remotion is the default production engine.
+- AI video is optional per shot. When justified, use the lowest-priced eligible Seedance Fast variant from the current ZooWork catalog; never hard-code a stale model ID or silently choose a more expensive family.
+- Use real authorized product evidence. Never invent product behavior, interfaces, metrics, testimonials, or customer data.
+- Remove sensitive data before capture and use only owned, licensed, or authorized assets.
+- A video is complete only when the actual MP4 has been reviewed and delivered as an accessible artifact.
+- Verify the applicable Remotion license before commercial publication.
 
 ## Repository structure
 
 ```text
 .
 ├── PROMPT.md
+├── package.json
+├── scripts/
+│   ├── provision.mjs
+│   └── verify.mjs
 ├── agent/
 │   └── AGENTS.md
 └── skills/
@@ -41,40 +93,11 @@ These four skills cover the complete product-video path without bundling a conso
     └── product-video-review/
 ```
 
-Every skill directory name matches the `name` in its `SKILL.md` frontmatter so it can be packaged, uploaded, and attached using ZooWork's skill zip rules.
-
-## Two different kinds of skill
-
-- `zoowork-managed-agents` is installed into a development assistant such as Codex or Claude Code. It teaches the assistant how to use the ZooWork SDK correctly.
-- The video skills under this repository's `skills/` directory are uploaded and attached to the Shotcraft Agent running on ZooWork Runtime.
-
-Install the official development skill first:
-
-```bash
-npx skills add SerendipityOneInc/zoowork-sdk-skills
-```
-
-Then load `zoowork-managed-agents` before working with ZooWork. Do not guess SDK calls from another Agent platform.
-
-## Important boundaries
-
-- Keep `ZOOWORK_API_KEY` only in a server-side environment variable or ignored local `.env` file. It must never enter a prompt, log, frontend bundle, or Git history.
-- Users enter only `ZOOWORK_API_KEY`. They must never be asked to find, copy, or configure an Agent ID.
-- All user-facing conversation, captions, voiceover, and UI copy must be in English.
-- The default audience and market context is the United States.
-- Remotion is the default production engine. Do not use an AI video model for ordinary UI animation, typography, transitions, or shots that can be made from real authorized product assets.
-- When a storyboard genuinely requires generated footage, select the lowest-priced eligible Seedance Fast variant from the current ZooWork model catalog. Do not hard-code a stale model ID or silently switch to a more expensive model.
-- Show real product behavior with real authorized screenshots or recordings. Never invent a feature or recreate a misleading fake interface.
-- Remove or replace customer, employee, account, financial, health, credential, and other sensitive data before capture.
-- Use only assets the user owns, licenses, or is authorized to use. Do not silently scrape protected media or bypass authentication.
-- A render is complete only when the final MP4 exists, has been reviewed, and is delivered as an accessible artifact. A progress message is not a video.
-- Verify the applicable Remotion license for the intended commercial or organizational use.
-
 ## References
 
 - [Reference console](https://shotcraft-console.vercel.app/)
 - [Video Shotcraft, Apache-2.0](https://github.com/Vincentwei1021/video-shotcraft)
 - [ZooWork Agent creation and public-release guide](https://starquest.feishu.cn/docx/AxJAd0dPDoWYIVxWQ9Xc2AjFndh)
-- [ZooWork SDK skills](https://github.com/SerendipityOneInc/zoowork-sdk-skills)
+- [ZooWork SDK Skills](https://github.com/SerendipityOneInc/zoowork-sdk-skills)
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution.

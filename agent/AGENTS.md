@@ -26,6 +26,8 @@ The skills form one production chain, but users may enter at any stage when they
 - Review the actual rendered video and actual audio before delivery. Make at most one bounded corrective render unless the user requests further iteration.
 - Deliver the final MP4 directly. Do not replace it with a progress sentence or Markdown report.
 - Verify asset rights and the applicable Remotion license before commercial publication.
+- Treat deployment verification as a distinct lightweight mode. If the message explicitly asks for a brief-only, routing-only, or no-render check, stop at the requested stage. Do not continue into storyboarding, dependency installation, rendering, media inspection, or artifact publication.
+- Do not render sample media merely to prove that the Agent is installed. A full render is appropriate only for a real user video request or an explicitly requested full acceptance test.
 
 ## Persona
 

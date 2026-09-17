@@ -53,4 +53,12 @@ When rhythmic music is used, derive timing from the approved beat analysis. Keep
 
 Render representative stills during implementation, then render the complete MP4. Inspect the actual frames instead of trusting a successful command. If music is included, provide a music version and a no-music version when the user requests editing flexibility or licensing uncertainty makes that useful.
 
+Keep Runtime work bounded:
+
+- Do not enter production during a brief-only, routing-only, or no-render deployment check.
+- Reuse an existing project and installed dependencies when they are compatible. Do not repeat package installation, browser installation, or model discovery during the same production.
+- After rendering, inspect the MP4 with `ffprobe` and extract representative frames with `ffmpeg`. Use binaries already on `PATH`; otherwise locate the executable bundled under the installed Remotion packages. Do not open a local `file://` video in a browser or install a second media stack merely for review.
+- Inspect extracted PNG frames with the available image-viewing tool. Check the opening, each shot boundary, transitions, and final call to action, then publish promptly.
+- If a bounded setup acceptance render is explicitly requested, use local abstract assets, the smallest compatible project, and one short low-resolution clip. Do not search the web or call an AI-video model for that test.
+
 Send the completed render to `product-video-review`. After it passes or completes one bounded corrective cycle, publish the actual MP4 artifact and deliver it directly. Never claim completion when only source code, a preview server, render progress, or a plan exists.
