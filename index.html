@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="An AI production room for truthful, cinematic product videos." />
+    <title>Shotcraft — Product Video Studio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230b0b0c%22/><path d=%22M26 30h48v40H26z%22 fill=%22none%22 stroke=%22%23ff5538%22 stroke-width=%226%22/><path d=%22m45 40 18 10-18 10z%22 fill=%22%23f8f5ee%22/></svg>" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="wordmark" href="/" aria-label="Shotcraft home"><span>SHOT</span>CRAFT</a>
+        <div class="top-meta"><span>PRODUCT VIDEO STUDIO</span><i></i><span>US MARKET</span></div>
+        <button id="newConversation" class="new-button" type="button">New conversation</button>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="heroTitle">
+          <div class="hero-copy">
+            <p class="eyebrow">TRUTH IN. MOTION OUT.</p>
+            <h1 id="heroTitle">Make the product<br />feel inevitable.</h1>
+            <p class="dek">Build a concise product story from real evidence—then take it from brief to cinematic storyboard, deterministic Remotion production, and a reviewed MP4.</p>
+            <a class="hero-action" href="#studio">Enter production <span>↘</span></a>
+          </div>
+          <div class="monitor" aria-hidden="true">
+            <div class="monitor-bar"><span>SCENE_01</span><b>00:00:04:12</b><i>REC</i></div>
+            <div class="frame">
+              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+              <div class="product-mark"><small>THE PRODUCT</small><strong>One clear<br />reason to care.</strong><em>→</em></div>
+            </div>
+            <div class="timeline">
+              <span class="playhead"></span>
+              <div class="track primary"><i></i><i></i><i></i><i></i></div>
+              <div class="track audio"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="pipeline" aria-label="Production pipeline">
+          <article class="active"><span>01</span><b>Brief</b><small>Truth, audience, goal</small></article>
+          <article><span>02</span><b>Storyboard</b><small>Shots, timing, sound</small></article>
+          <article><span>03</span><b>Production</b><small>Remotion by default</small></article>
+          <article><span>04</span><b>Review</b><small>Actual MP4, inspected</small></article>
+        </section>
+
+        <section id="studio" class="studio" aria-label="Shotcraft production conversation">
+          <aside class="brief-panel">
+            <div class="panel-label"><span>INPUT / 01</span><b>Production request</b></div>
+            <form id="composer">
+              <label for="evidence">AUTHORIZED PRODUCT EVIDENCE</label>
+              <textarea id="evidence" maxlength="2200" rows="5" placeholder="Describe demonstrable features, real product states, approved claims, and any facts that must not be inferred."></textarea>
+              <label for="assetUrls">PUBLIC ASSET URLS</label>
+              <input id="assetUrls" maxlength="900" placeholder="URLs you own or are authorized to use" />
+              <div class="field-grid">
+                <div><label for="goal">VIDEO GOAL</label><input id="goal" maxlength="140" placeholder="Drive a free trial" /></div>
+                <div><label for="audience">US AUDIENCE</label><input id="audience" maxlength="140" placeholder="Customer-success leaders" /></div>
+                <div><label for="duration">DURATION</label><select id="duration"><option>15 seconds</option><option>30 seconds</option><option>45 seconds</option><option>60 seconds</option></select></div>
+                <div><label for="aspect">ASPECT RATIO</label><select id="aspect"><option>16:9 landscape</option><option>9:16 vertical</option><option>1:1 square</option></select></div>
+                <div><label for="tone">TONE</label><input id="tone" maxlength="100" placeholder="Cinematic, precise" /></div>
+                <div><label for="cta">CALL TO ACTION</label><input id="cta" maxlength="120" placeholder="Start your free trial" /></div>
+              </div>
+              <div class="field-grid compact">
+                <div><label for="mode">COLLABORATION</label><select id="mode"><option>Autonomous — produce the complete video</option><option>Guided — approve storyboard before render</option><option>Template-led — produce the complete video</option><option>Brief only — do not storyboard or render</option><option>Storyboard only — do not render</option></select></div>
+                <div><label for="engine">PRODUCTION ENGINE</label><select id="engine"><option>Remotion default</option><option>Remotion + justified Seedance Fast shots</option></select></div>
+              </div>
+              <label for="request">WHAT SHOULD WE MAKE?</label>
+              <textarea id="request" maxlength="2200" rows="5" placeholder="Describe the story, channel, must-show moments, constraints, deadline, or the stage you want help with."></textarea>
+              <p class="privacy-note">Text and authorized public URLs only. No private uploads, credentials, customer data, or signed asset links.</p>
+              <button id="send" class="send-button" type="submit"><span>Produce video</span><b>↗</b></button>
+            </form>
+          </aside>
+
+          <section class="production-panel">
+            <div class="production-head">
+              <div><span class="live-dot"></span><b>LIVE PRODUCTION THREAD</b></div>
+              <p>English · United States · Session-private</p>
+            </div>
+            <div class="truth-bar"><span>PRODUCT TRUTH</span><p>Every depicted feature, interface, metric, and outcome must be supported by authorized evidence.</p></div>
+            <div id="status" class="status" hidden><span class="loader"></span><div><b>Shotcraft is working</b><small id="statusText">Preparing the complete production</small></div><time id="elapsed">0s</time></div>
+            <div id="error" class="error" role="alert" hidden></div>
+            <div id="conversation" class="conversation" aria-live="polite">
+              <div id="emptyState" class="empty-state">
+                <div class="slate"><span>SC</span><i></i></div>
+                <blockquote>“A cinematic video begins with one true thing worth remembering.”</blockquote>
+                <p>Fill what you know, or choose a starting point below.</p>
+              </div>
+            </div>
+            <div id="artifacts" class="artifacts" hidden></div>
+          </section>
+        </section>
+
+        <section class="examples" aria-labelledby="examplesTitle">
+          <header><p class="eyebrow">START WITH A REAL PRODUCTION DECISION</p><h2 id="examplesTitle">Three ways into the cut.</h2></header>
+          <div class="example-grid">
+            <button data-example="Produce the complete product video and deliver the reviewed MP4. The authorized fictional product is ClearCue, a browser writing assistant that lets customer-success teams paste a support reply, compare it with an approved tone guide, and copy a revised draft. Use typography and abstract Remotion graphics; do not invent a product interface. Continue through storyboard, render, review, and artifact publication without asking again."><span>01 / COMPLETE VIDEO</span><b>Go from true facts to a finished cut</b><small>Autonomous Remotion production</small></button>
+            <button data-example="Produce the complete product video from my authorized evidence and public asset URLs. Use real captures for product behavior, Remotion for composition, and no AI footage unless a shot genuinely requires it. Continue through actual-render review and deliver the MP4 without stopping at the brief."><span>02 / REAL PRODUCT</span><b>Turn approved evidence into motion</b><small>Brief to reviewed MP4</small></button>
+            <button data-example="Create a concise product-video brief only. Identify unsupported claims and missing evidence. Do not storyboard or render in this request."><span>03 / BRIEF ONLY</span><b>Stop deliberately at the brief</b><small>Explicit planning mode</small></button>
+          </div>
+        </section>
+
+        <section class="delivery-rule">
+          <span>FINAL MEANS FINAL.</span>
+          <p>A production is complete only when the actual rendered MP4 has been reviewed and delivered. Source code, progress text, a storyboard, or a report is not the video.</p>
+          <b>REMOTION DEFAULT</b>
+        </section>
+      </main>
+
+      <footer><b>SHOTCRAFT</b><p>Use only owned, licensed, or authorized evidence and assets. Verify the applicable Remotion license before commercial publication.</p><span>US / EN</span></footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

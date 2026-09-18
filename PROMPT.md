@@ -23,6 +23,7 @@ Do not stop after Runtime setup and do not ask whether I want a UI. Build and de
 - Language: English only
 - Market: United States only
 - Workflow: product evidence → brief → storyboard → deterministic Remotion production → actual-render review → MP4 delivery
+- Completion rule: when a user asks for a video, render, production, or MP4, the brief and storyboard are intermediate milestones; continue automatically to a reviewed, downloadable MP4 unless a concrete blocker prevents it
 - Default renderer: Remotion
 - Optional AI footage: use only when an approved shot cannot reasonably use real product capture, licensed media, or Remotion graphics; choose the lowest-priced eligible Seedance Fast variant in the current ZooWork catalog
 - Product truth: never invent product behavior, interfaces, metrics, testimonials, or customer data
@@ -82,23 +83,28 @@ Build at least:
 - final artifact status and direct MP4 download when a real render is requested; and
 - explicit empty, loading, error, reconnect, and quota states.
 
+The primary action must be **Produce video**, not **Start brief**. Make `Autonomous — produce the complete video` the default collaboration mode. Keep brief-only and storyboard-only work available as explicit choices, but never infer them from an ordinary request to make a product video.
+
 For the lightweight public MVP:
 
 - keep `ZOOWORK_API_KEY`, the Agent ID, and every ZooWork call on the server;
 - let the browser call only the app's own server routes;
 - create a separate ZooWork Session for each visitor or new conversation, keep its identifier in a signed, HTTP-only cookie or equivalent server-controlled state, and never let one visitor load another visitor's Session;
 - stream events until `run.finished`, retain the latest cursor for reconnect, and handle loading, error, timeout, and New conversation states;
+- treat a closed HTTP stream or serverless time limit as `still running`, not as production failure; poll durable Session history and artifacts after the initial stream, survive refresh, and allow at least 20 minutes for a first Remotion render without submitting the production twice;
 - add a basic server-side rate or usage limit so the public page cannot spend credits without bounds;
 - do not add login, an admin panel, billing, a dashboard, D1, Durable Objects, or per-user Agent provisioning unless they are genuinely required; and
 - accept text and authorized public asset URLs only. Do not enable private media uploads until a signed, expiring object-storage path is verified end to end.
 
-Preview locally, run one text-only UI smoke test without rendering a sample video, then deploy to Vercel. This prompt already authorizes public deployment, so do not ask whether to deploy. If Vercel requires interactive login, ask me only to complete that authorization, then continue automatically.
+Preview locally, run one text-only UI smoke test without rendering a sample video, then deploy to Vercel. The smoke test must verify that an autonomous request is composed as an end-to-end production request rather than a brief-only request. This prompt already authorizes public deployment, so do not ask whether to deploy. If Vercel requires interactive login, ask me only to complete that authorization, then continue automatically.
 
 Verify that the public URL loads, a new conversation streams correctly, refresh restores it, visitors are isolated, rate limiting works, and no ZooWork secret or Agent ID appears in client assets or browser network responses.
 
-## 6. Keep full media testing opt-in
+## 6. Distinguish setup checks from real production
 
-Do not run a Remotion acceptance render during installation or UI deployment. Run the complete brief → storyboard → render → review → MP4 flow only when I explicitly request a full acceptance test or provide a real authorized product-video task.
+Do not run a Remotion acceptance render merely to prove installation or UI deployment. However, when I provide a real authorized product-video task or ask to make, create, produce, render, or deliver a video, that is explicit authorization to run the complete brief → storyboard → render → review → MP4 flow. Do not stop at the brief, ask whether to continue, or require a second production command.
+
+If a real product-video task is included with this prompt, submit it after deployment and keep following the durable Session until the reviewed MP4 is available. If no real product evidence is supplied, finish the installation and public UI without inventing a fake product video.
 
 For an explicitly requested acceptance test, keep it Remotion-only, use one three-to-five-second low-resolution clip, use no network media or AI-video credits, make at most one corrective render, inspect the actual MP4, and publish the actual artifact. Explain beforehand that a first render can take 10–20 minutes because Runtime may need rendering dependencies and browser binaries.
 
@@ -116,4 +122,4 @@ Return:
 
 Do not create an acceptance report, retry assessment, evidence bundle, or Markdown deliverable instead of the product. The running Agent and public URL are the deliverables.
 
-The intended flow is: API key → fast incremental setup → one no-render verification → lightweight product-video UI → public Vercel URL.
+The intended flow is: API key → fast incremental setup → one no-render verification → lightweight product-video UI → public Vercel URL → real production request → reviewed MP4.

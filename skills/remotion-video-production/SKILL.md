@@ -7,6 +7,8 @@ description: Build and render an approved product-video storyboard as a determin
 
 Produce the real video, not a plan for one.
 
+When the user asked to make, create, produce, render, or deliver a video or MP4, that request authorizes rendering. Do not ask again after the brief or storyboard. Stop before rendering only for a concrete product-truth, rights, missing-asset, or technical blocker that cannot be resolved with a conservative default.
+
 Keep all visible text, captions, voiceover, file-facing labels, and final user communication in English. Optimize the story for the approved United States audience.
 
 Remotion is the default production engine. AI video is an optional shot source, not the renderer for the complete product video.
@@ -56,6 +58,7 @@ Render representative stills during implementation, then render the complete MP4
 Keep Runtime work bounded:
 
 - Do not enter production during a brief-only, routing-only, or no-render deployment check.
+- Do enter production for an autonomous or complete-video request. The brief and storyboard are prerequisites to resolve, not reasons to end the turn.
 - Reuse an existing project and installed dependencies when they are compatible. Do not repeat package installation, browser installation, or model discovery during the same production.
 - After rendering, inspect the MP4 with `ffprobe` and extract representative frames with `ffmpeg`. Use binaries already on `PATH`; otherwise locate the executable bundled under the installed Remotion packages. Do not open a local `file://` video in a browser or install a second media stack merely for review.
 - Inspect extracted PNG frames with the available image-viewing tool. Check the opening, each shot boundary, transitions, and final call to action, then publish promptly.

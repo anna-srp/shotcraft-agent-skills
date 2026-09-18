@@ -37,6 +37,6 @@ If the user supplies rhythmic music, analyze its tempo, phase, major sections, a
 
 ## Approval boundary
 
-In `guided` mode, present the complete storyboard and wait for approval before production. In `autonomous` mode, record the same decisions and continue without ceremonial pauses. In `template-led` mode, preserve the template's broad structure while adapting copy, assets, brand system, and timing to the product.
+In `guided` mode, present the complete storyboard and wait only when the user explicitly requested storyboard approval before rendering. In `autonomous` mode, or whenever the user asked for the actual video without requesting an approval pause, record the same decisions and continue immediately without a ceremonial checkpoint. In `template-led` mode, preserve the template's broad structure while adapting copy, assets, brand system, and timing to the product; continue to production unless the user explicitly requested review first.
 
-Hand the final storyboard to `remotion-video-production`. Do not confuse a list of effects with a complete storyboard.
+Hand the final storyboard to `remotion-video-production`. A complete-video request must not end with the storyboard. Do not confuse a list of effects with a complete storyboard.

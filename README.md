@@ -19,7 +19,7 @@ Fast setup proves the parts required for immediate use: authentication, one pers
 | Mode | What it does | Expected use |
 |---|---|---|
 | Fast setup | Incremental deployment plus one brief-only Runtime verification | Default installation path |
-| Real product task | Brief, storyboard, Remotion production, review, and MP4 delivery | First actual use |
+| Real product task | Automatically continues through brief, storyboard, Remotion production, review, and MP4 delivery | First actual use |
 | Full acceptance test | One short synthetic Remotion render and artifact verification | Only when explicitly requested |
 
 The quick Runtime verification has a two-minute hard budget. A first full Remotion render can take 10–20 minutes because the Runtime may need browser and rendering dependencies. That work is deferred until it produces something the user actually wants.
@@ -46,9 +46,9 @@ Ignored `.zoowork/` state stores the generated Agent ID, Skill IDs, content hash
 
 The default deliverable is a persistent Shotcraft setup Agent running on ZooWork Runtime with all four Skills attached and eligible, plus a secure product UI at a publicly accessible URL. Setup reports status directly in the conversation; it does not replace the Agent or app with a Markdown test report.
 
-The UI step creates a lightweight Vercel-hosted frontend around the same Agent, keeps the organization API key and Agent ID server-side, creates a separate Session per visitor or conversation, and adds a basic usage limit. It intentionally skips login, billing, dashboards, and private media upload in the first public build. Public deployment is part of the default prompt, not an optional follow-up.
+The UI step creates a lightweight Vercel-hosted frontend around the same Agent, keeps the organization API key and Agent ID server-side, creates a separate Session per visitor or conversation, and adds a basic usage limit. Autonomous complete-video production is the default: the brief and storyboard are visible milestones, not stopping points. Long renders recover through durable Session history and artifact polling instead of becoming errors when the first HTTP stream ends. The first public build intentionally skips login, billing, dashboards, and private media upload.
 
-The setup verification remains no-render. A real video or full media acceptance test is still opt-in so installation does not spend image or video credits.
+The setup verification remains no-render so installation does not spend media credits. A real request to make, create, produce, render, or deliver a video is the opt-in and must continue to the reviewed MP4 without a second confirmation.
 
 ## Included Skills
 

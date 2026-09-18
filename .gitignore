@@ -7,3 +7,6 @@ dist/
 tmp/
 artifacts/
 .zoowork/
+.vercel
+.env*
+!.env.example

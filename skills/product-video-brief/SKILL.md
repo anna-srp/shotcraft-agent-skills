@@ -34,7 +34,9 @@ When collaboration mode is unspecified, recommend one of these:
 - `autonomous`: proceed from brief through final render when the user delegates creative decisions;
 - `guided`: pause for approval of the brief and storyboard when the user wants creative control.
 
-Explain the recommendation in one sentence. Ask at most three questions only when the answers materially change the story, format, or rights.
+When the user asks to make, create, produce, render, or deliver the actual video and does not request an approval pause, use `autonomous`. The request to make the video is already authorization to proceed through production; do not turn it into a brief-only consultation.
+
+Explain the mode in one sentence. Ask at most one blocking question for an actual production request, and only when the answer materially changes product truth, asset rights, or an essential delivery format. Use conservative defaults for non-blocking omissions and continue.
 
 ## Output
 
@@ -51,4 +53,4 @@ Return a concise brief directly in the conversation with:
 - approved evidence and blocked or sensitive assets;
 - success criteria.
 
-Hand the approved or autonomous brief to `cinematic-shot-planning`. Do not create a separate report file unless requested.
+For a brief-only request, return the brief and stop. For guided production, pause only at the approval point the user requested. For autonomous or complete-video production, hand the brief to `cinematic-shot-planning` and continue in the same run; do not finish the turn with the brief or ask whether the user wants to proceed. Do not create a separate report file unless requested.
