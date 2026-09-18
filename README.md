@@ -5,10 +5,10 @@ A portable, English-language Skill pack for building product videos for the Unit
 ## Fast start
 
 1. Clone this repository and open it in Codex or Claude Code.
-2. Copy the complete contents of [PROMPT.md](PROMPT.md) into a new conversation.
+2. Copy [SHORT_PROMPT.md](SHORT_PROMPT.md) for email or a web page, or use the complete [PROMPT.md](PROMPT.md) for explicit implementation details.
 3. Create a ZooWork API key under `Settings → API Keys`, save it in a local ignored `.env` file, and tell the assistant when it is ready. Never paste the key into chat.
-4. The assistant runs the repository's checked-in setup and returns the running Agent status directly in chat.
-5. Choose whether to make a real video, customize the workflow, or build a UI.
+4. The assistant runs the checked-in setup and performs one no-render Runtime verification.
+5. It then builds an original Shotcraft UI and deploys it to a publicly accessible URL.
 
 The API key is the only value entered manually. The Agent ID is created, stored, and reused automatically.
 
@@ -44,9 +44,11 @@ Ignored `.zoowork/` state stores the generated Agent ID, Skill IDs, content hash
 
 ## Expected outcome
 
-The default deliverable is a persistent Shotcraft Agent running on ZooWork Runtime with all four Skills attached and eligible. Setup reports its status directly in the conversation; it does not replace the Agent with a Markdown test report.
+The default deliverable is a persistent Shotcraft setup Agent running on ZooWork Runtime with all four Skills attached and eligible, plus a secure product UI at a publicly accessible URL. Setup reports status directly in the conversation; it does not replace the Agent or app with a Markdown test report.
 
-ZooWork Runtime hosts the Agent and Skills. It does not automatically create a public video-production website. A render console or customer-facing UI is a separate, optional step.
+The UI step uses ZooWork App Kit as the preferred backend foundation, keeps the organization API key server-side, disables the Agent picker, provisions per-user Agents for isolation, and attaches the four org Skills automatically. Public deployment is part of the default prompt, not an optional follow-up.
+
+The setup verification remains no-render. A real video or full media acceptance test is still opt-in so installation does not spend image or video credits.
 
 ## Included Skills
 
@@ -80,6 +82,7 @@ Do not upload the development Skill to the Runtime Agent or install the four pro
 ```text
 .
 ├── PROMPT.md
+├── SHORT_PROMPT.md
 ├── package.json
 ├── scripts/
 │   ├── provision.mjs
