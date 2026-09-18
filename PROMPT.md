@@ -39,9 +39,7 @@ Before making ZooWork calls, use the official `zoowork-managed-agents` Skill fro
 
 <https://github.com/SerendipityOneInc/zoowork-sdk-skills>
 
-If it is already installed, read that copy. Do not reinstall it only to check for updates. Also read the current `app-kit/README.md` in:
-
-<https://github.com/SerendipityOneInc/zoowork-quickstarts>
+If it is already installed, read that copy. Do not reinstall it only to check for updates.
 
 The development Skill teaches the coding assistant how to use ZooWork. The four product-video Skills in this repository are what run on the deployed Agent.
 
@@ -72,32 +70,31 @@ The Runtime verification has a two-minute budget. It must not create a storyboar
 
 After the quick Runtime verification passes, continue without asking for another approval.
 
-Use ZooWork App Kit as the backend and streaming foundation unless this repository already contains a stronger compatible frontend. Preserve its authentication, D1 ownership records, Durable Object turn execution, refresh-safe streaming, and server-only ZooWork credential boundary. Replace the generic presentation with an original Shotcraft experience.
+Build the smallest useful full-stack web experience for this Agent. Reuse the setup Agent ID; do not provision another Agent for the UI. Prefer a simple Vercel-compatible framework and deploy to Vercel when the account is already authenticated. Create an original Shotcraft experience.
 
 Build at least:
 
 - a product evidence and authorized-facts form;
 - video goal, audience, aspect ratio, duration, tone, and call-to-action controls;
-- a conversation and production-progress view that survives refresh;
+- a streaming conversation and production-progress view that survives refresh;
 - brief and storyboard review states;
 - clear Remotion-default and optional Seedance Fast labeling;
 - final artifact status and direct MP4 download when a real render is requested; and
 - explicit empty, loading, error, reconnect, and quota states.
 
-For the public deployment:
+For the lightweight public MVP:
 
-- set `AGENT_PICKER=off`;
-- keep `ZOOWORK_API_KEY` only in the Worker or hosting provider's server-side secret store;
-- do not put `ZOOWORK_AGENT_ID`, Agent IDs, or Skill IDs in browser code;
-- default to App Kit's per-user Agent mode, store the user-to-Agent mapping in D1, and attach the four org Skill IDs from generated server-side deployment state to each user Agent;
-- never share one agent-scope `/workspace` across unrelated public users;
-- put Cloudflare Access or an equivalent real authentication layer in front of the app and never use `DEV_EMAIL` in production;
-- enforce session ownership, rate limits, usage limits, and bounded retries; and
-- treat input media as authorized, temporary task data. App Kit's native attachments are not production-wired, so do not claim private uploads work unless a signed, expiring object-storage bridge has passed an end-to-end test. A text-and-authorized-URL MVP is acceptable for the first public release.
+- keep `ZOOWORK_API_KEY`, the Agent ID, and every ZooWork call on the server;
+- let the browser call only the app's own server routes;
+- create a separate ZooWork Session for each visitor or new conversation, keep its identifier in a signed, HTTP-only cookie or equivalent server-controlled state, and never let one visitor load another visitor's Session;
+- stream events until `run.finished`, retain the latest cursor for reconnect, and handle loading, error, timeout, and New conversation states;
+- add a basic server-side rate or usage limit so the public page cannot spend credits without bounds;
+- do not add login, an admin panel, billing, a dashboard, D1, Durable Objects, or per-user Agent provisioning unless they are genuinely required; and
+- accept text and authorized public asset URLs only. Do not enable private media uploads until a signed, expiring object-storage path is verified end to end.
 
-Preview locally, run one text-only UI smoke test, then deploy. Use an already authenticated hosting provider when available; otherwise use App Kit's Cloudflare Workers path. This prompt already authorizes public deployment, so do not ask whether to deploy. If the provider requires interactive login, ask me only to complete that authorization, then continue automatically.
+Preview locally, run one text-only UI smoke test without rendering a sample video, then deploy to Vercel. This prompt already authorizes public deployment, so do not ask whether to deploy. If Vercel requires interactive login, ask me only to complete that authorization, then continue automatically.
 
-Verify that the public URL loads, authentication is active, a new conversation can stream a response, refresh restores it, and the ZooWork key is absent from client assets and network responses.
+Verify that the public URL loads, a new conversation streams correctly, refresh restores it, visitors are isolated, rate limiting works, and no ZooWork secret or Agent ID appears in client assets or browser network responses.
 
 ## 6. Keep full media testing opt-in
 
@@ -113,10 +110,10 @@ Return:
 - all four attached Skill names and enabled/eligible status;
 - the quick verification result and elapsed time;
 - confirmation that setup spent no image or video generation credits;
-- the deployed public URL and authentication mode;
+- the deployed public Vercel URL;
 - the UI smoke-test result; and
 - any verified first-release limitation, especially media upload status.
 
 Do not create an acceptance report, retry assessment, evidence bundle, or Markdown deliverable instead of the product. The running Agent and public URL are the deliverables.
 
-The intended flow is: API key → fast incremental setup → one no-render verification → secure product UI → public URL.
+The intended flow is: API key → fast incremental setup → one no-render verification → lightweight product-video UI → public Vercel URL.

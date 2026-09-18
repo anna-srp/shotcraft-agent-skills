@@ -46,7 +46,7 @@ Ignored `.zoowork/` state stores the generated Agent ID, Skill IDs, content hash
 
 The default deliverable is a persistent Shotcraft setup Agent running on ZooWork Runtime with all four Skills attached and eligible, plus a secure product UI at a publicly accessible URL. Setup reports status directly in the conversation; it does not replace the Agent or app with a Markdown test report.
 
-The UI step uses ZooWork App Kit as the preferred backend foundation, keeps the organization API key server-side, disables the Agent picker, provisions per-user Agents for isolation, and attaches the four org Skills automatically. Public deployment is part of the default prompt, not an optional follow-up.
+The UI step creates a lightweight Vercel-hosted frontend around the same Agent, keeps the organization API key and Agent ID server-side, creates a separate Session per visitor or conversation, and adds a basic usage limit. It intentionally skips login, billing, dashboards, and private media upload in the first public build. Public deployment is part of the default prompt, not an optional follow-up.
 
 The setup verification remains no-render. A real video or full media acceptance test is still opt-in so installation does not spend image or video credits.
 
