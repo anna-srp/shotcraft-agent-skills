@@ -83,7 +83,7 @@ Build at least:
 - final artifact status and direct MP4 download when a real render is requested; and
 - explicit empty, loading, error, reconnect, and quota states.
 
-The primary action must be **Produce video**, not **Start brief**. Make `Autonomous — produce the complete video` the default collaboration mode. Keep brief-only and storyboard-only work available as explicit choices, but never infer them from an ordinary request to make a product video.
+The primary action must be **Produce video**, not **Start brief**. Make `Autonomous — produce the complete video` the default collaboration mode. When Autonomous is selected, the request composer must send an explicit complete-video instruction even if the optional free-text request field is empty; never replace it with `Build the brief` or another brief-only instruction. Keep brief-only and storyboard-only work available as explicit choices, but never infer them from an ordinary request to make a product video.
 
 For the lightweight public MVP:
 
